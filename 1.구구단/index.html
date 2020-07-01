@@ -15,11 +15,18 @@
       class LikeButton extends React.Component {
         constructor(props) {
           super(props);
-          
+          //상태 - 화면에서 바뀌는 부분을 표현 할때 사용된다.
+          this.state = {
+            liked: false,
+          }
         }
         //화면에 표현해주는 함수
         render() {
-          return e('button', null, 'Like');
+          return e(
+            'button', 
+            { onClick: () => { this.setState({ liked: !this.state.liked })}, type: 'submit' },
+            this.state.liked === true ? 'Liked' : 'Like'
+            );
           //<button>Like</button>
         }
       }
