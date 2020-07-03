@@ -26,12 +26,9 @@
           };
         }
         
-        //this.onSubmit으로 불러올수 있고 render에 넣는 것보다 더 깔끔하게 코드를 관리할수 있다.
         onSubmit = (e) => {
           e.preventDefault();
           if(parseInt(this.state.value) === this.state.first * this.state.second) {
-            // this.setState((prevState) => { ... });
-            // 예전 state 값으로 새로운 state에서 참조 해야 할때는 함수에 매개변수를 사용하기
             this.setState((prevState) => { 
               return {
                 result: ` 이전 정답[${prevState.value}] 정답!`,
@@ -40,6 +37,7 @@
                 value: '',
               }
             });
+            this.input.focus(); //input이 붙은 ref에 focus()
           } else {
             this.setState({
               result: '땡',
@@ -52,12 +50,18 @@
           this.setState({value: e.target.value}) 
         };
 
+        
+        inputRef = (c) => { this.input = c;};
+        input;
+
         render() {
+          console.log('렌더링');
+          // <input ref={(c) => { this.input = c;}}
           return (
             <div>
               <div>{this.state.first}곱하기 { this.state.second }는?</div>
               <form onSubmit={ this.onSubmit }>
-                <input type="number" value={this.state.value} onChange={this.onChange}/>
+                <input ref={ this.inputRef }  type="number" value={this.state.value} onChange={this.onChange}/>
                 <button >입력!</button>
               </form>   
               <div>{this.state.result}</div>
@@ -75,21 +79,21 @@
     </script>
 
     <script>
-      /**
-       *  this.setState를 사용해서 state를 번경할때 setState()는 비동기 함수 이기 때문에
-       *  this.setState( value: this.state.value + 1);
-       *  this.setState( value: this.state.value + 1);
-       *  this.setState( value: this.state.value + 1); ....
-       *  위에 처럼 처도 3이 아닌 1이 나올수 있다. 그렇기 때문에
-       *  this.setState((prevState) => { ... });
-       *  위처럼 매개변수에 현재 함수에 저장된 현재 매개변수를 사용해서 함수를 만든다.
+      /** ref
+       * 정답을 입력한 경우 INPUT에 focus를 주어 바로 정답을 입력해주고 싶을때
+       * React가 DOM을 알아서 관리해 준다는 생각으로 데이터만 바꾼다는 느낌으로 사용하면 좋다.
+       *
+       * 
+       * 1.<input ref={(c) => { this.input = c;}}
+       *   -render에서 JSX에 맞는 값을 넣는다.
+       * 2.this.input.focus();
+       *   -focus를 하고 싶은 곳에서 사용하기
+       *
+       *  this.setState()를 할때마다 렌더링을 하기 때문에 최적화를 할때는 최적화를 하는 것이 좋다.
+       *    -JSX안에 함수를 넣는 경우에 렌더링이 될때마다 함수를 만들기 때문에 최대한 빼는 것이 좋다.
        **/
     </script>
   </body>
 
 </html>
 
-
-<!-- 
-  
--->
