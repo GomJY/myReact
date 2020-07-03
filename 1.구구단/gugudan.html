@@ -15,85 +15,81 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      class GuGuDan extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            first: Math.ceil(Math.random() * 9),  
-            second: Math.ceil(Math.random() * 9),
-            value: '',
-            result: '',  
-          };
+      //HOOKS 함수형 컴포넌트에서 setState, ref 사용하기
+      const GuGuDan = () => {
+        console.log('렌더링');
+        //state
+        //const [first, setFirst] => [state이름, 이state전용 setState] 비구조화 할당 문법, 구조 분해 할당(destrocture)
+        const [first, setFirst]   = React.useState(Math.ceil(Math.random() * 9)); 
+        const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9)); 
+        const [value, setValue]   = React.useState(''); 
+        const [result, setResult]  = React.useState(''); 
+
+        ///ref 사용법
+        const inputRef = React.useRef(null);
+
+        //이벤트 함수
+        const onChangeInput = (e) => {
+          setValue(e.target.value);
         }
-        
-        onSubmit = (e) => {
+        const onSubmitForm = (e) => {
           e.preventDefault();
-          if(parseInt(this.state.value) === this.state.first * this.state.second) {
-            this.setState((prevState) => { 
-              return {
-                result: ` 이전 정답[${prevState.value}] 정답!`,
-                first: Math.ceil(Math.random() * 9),  
-                second: Math.ceil(Math.random() * 9),
-                value: '',
-              }
-            });
-            this.input.focus(); //input이 붙은 ref에 focus()
+          if(parseInt(value) === first * second){
+            console.log('정답');
+            setResult('정답' + value);
+            setFirst(Math.ceil(Math.random() * 9));
+            setSecond(Math.ceil(Math.random() * 9));
+            setValue('');
+
+            //hooks에 ref는 current가 붙는 것으로 조금 다르다.
+            inputRef.current.focus();
           } else {
-            this.setState({
-              result: '땡',
-              value: '',
-            });
+            console.log('오답');
+            setResult('오답');
+            setValue('');
+            inputRef.current.focus();
           }
-        };
-        
-        onChange = (e) => { 
-          this.setState({value: e.target.value}) 
-        };
-
-        
-        inputRef = (c) => { this.input = c;};
-        input;
-
-        render() {
-          console.log('렌더링');
-          // <input ref={(c) => { this.input = c;}}
-          return (
-            <div>
-              <div>{this.state.first}곱하기 { this.state.second }는?</div>
-              <form onSubmit={ this.onSubmit }>
-                <input ref={ this.inputRef }  type="number" value={this.state.value} onChange={this.onChange}/>
-                <button >입력!</button>
-              </form>   
-              <div>{this.state.result}</div>
-            </div> 
-          );
         }
+
+        return (
+          <React.Fragment>
+            <form onSubmit={onSubmitForm}>
+              <div>
+                {first} X {second} = <input ref={inputRef} onChange={onChangeInput} value={ value }/>  
+              </div>
+                <button>입력!</button>
+            </form>
+            <div id="result"> {result} </div>
+          </React.Fragment>
+        );
       }
     </script>
+
     <script type="text/babel">
       ReactDOM.render(
-        <React.Fragment>
           <GuGuDan/>
-        </React.Fragment>
-      ,document.querySelector("#root"));
+        ,document.querySelector("#root"));
     </script>
 
     <script>
-      /** ref
-       * 정답을 입력한 경우 INPUT에 focus를 주어 바로 정답을 입력해주고 싶을때
-       * React가 DOM을 알아서 관리해 준다는 생각으로 데이터만 바꾼다는 느낌으로 사용하면 좋다.
-       *
-       * 
-       * 1.<input ref={(c) => { this.input = c;}}
-       *   -render에서 JSX에 맞는 값을 넣는다.
-       * 2.this.input.focus();
-       *   -focus를 하고 싶은 곳에서 사용하기
-       *
-       *  this.setState()를 할때마다 렌더링을 하기 때문에 최적화를 할때는 최적화를 하는 것이 좋다.
-       *    -JSX안에 함수를 넣는 경우에 렌더링이 될때마다 함수를 만들기 때문에 최대한 빼는 것이 좋다.
-       **/
+      /**
+      * hooks 탄생 배경
+      *  -리엑트는 setState, ref를 쓰지 않는 컴포넌트  최대한 클래스를 사용하지 말라고 했다.
+      *   그리고 사람들은 함수 컴포넌트로 간단하게 만들었고 여기서 다시 ref랑 setState를 사용하기를 원해서 hooks가 등장하였다.
+      *
+      * react hooks란 함수 컴포넌트에서 ref랑 setState를 사용할수 있는것
+      *   -짥고 간결하다.
+      * 
+      * react Hooks 사용법
+      *   -state는 비구조화 할당법을 적용한다.  형식: const [stateName, setStateName] = React.useState(초기값);
+      *   -setState는 setStateName(적용할값);
+      *   -ref는 아래처럼
+      *     -const nameRef = React.useRef(초기값);
+      *     -<input ref={inputRef} 
+      *   -!!! ref 통해 focus() 같은 함수를 사용 하고 싶을때
+      *     -inputRef.current.focus();
+      **/
     </script>
   </body>
 
 </html>
-
