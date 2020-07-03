@@ -30,11 +30,15 @@
         onSubmit = (e) => {
           e.preventDefault();
           if(parseInt(this.state.value) === this.state.first * this.state.second) {
-            this.setState({
-              result: ` ${this.state.first} x ${this.state.second} = ${this.state.value} 정답!`,
-              first: Math.ceil(Math.random() * 9),  
-              second: Math.ceil(Math.random() * 9),
-              value: '',
+            // this.setState((prevState) => { ... });
+            // 예전 state 값으로 새로운 state에서 참조 해야 할때는 함수에 매개변수를 사용하기
+            this.setState((prevState) => { 
+              return {
+                result: ` 이전 정답[${prevState.value}] 정답!`,
+                first: Math.ceil(Math.random() * 9),  
+                second: Math.ceil(Math.random() * 9),
+                value: '',
+              }
             });
           } else {
             this.setState({
@@ -49,7 +53,6 @@
         };
 
         render() {
-          //<input type="number".../> 단일 태그는 전부 뒤에 />을 달아야 된다. 이것은 html이 아닌 JSX 이기 때문에 유념해야된다.
           return (
             <div>
               <div>{this.state.first}곱하기 { this.state.second }는?</div>
@@ -67,14 +70,19 @@
       ReactDOM.render(
         <React.Fragment>
           <GuGuDan/>
-          <GuGuDan/>
         </React.Fragment>
       ,document.querySelector("#root"));
-      /** 지원하는 경우에는 위에 대신 이거 쓰기
-       * <>
-       *  <GuGuDan/>
-       *  <GuGuDan/>
-       * </>
+    </script>
+
+    <script>
+      /**
+       *  this.setState를 사용해서 state를 번경할때 setState()는 비동기 함수 이기 때문에
+       *  this.setState( value: this.state.value + 1);
+       *  this.setState( value: this.state.value + 1);
+       *  this.setState( value: this.state.value + 1); ....
+       *  위에 처럼 처도 3이 아닌 1이 나올수 있다. 그렇기 때문에
+       *  this.setState((prevState) => { ... });
+       *  위처럼 매개변수에 현재 함수에 저장된 현재 매개변수를 사용해서 함수를 만든다.
        **/
     </script>
   </body>
@@ -82,8 +90,6 @@
 </html>
 
 
-  <!-- fragment
-     <React.Fragment>는 컴포넌트가 여러개의 요소를 반환하는 것입니다. Fragments를 사용하면 DOM에 별도 노드를 추가하지 않고 자식 목록을 그룹화할 수 있습니다.
-      하지만 현재 버전이 <>것을 지원하는 경우에는 대신 이것을 사용해도 된다
-
-  state은 component 마다 다른 state를 가진다. -->
+<!-- 
+  
+-->
