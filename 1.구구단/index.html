@@ -1,38 +1,58 @@
 <html>
   <head>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" ></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js" ></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" ></script>
+    <!-- <script crossorigin src="https://unpkg.com/react@16.7.0/umd/react.production.min.js" ></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js" ></script> -->
   </head>
   <body>
     <div id="root"></div> 
-    <!-- 결과 -->
-    <!-- 
-      <button>Like</button>
-    -->
-    <script>
-      const e =React.createElement;
 
+    <script type="text/babel">
       class LikeButton extends React.Component {
         constructor(props) {
           super(props);
-          //상태 - 화면에서 바뀌는 부분을 표현 할때 사용된다.
           this.state = {
             liked: false,
-          }
+          };
         }
-        //화면에 표현해주는 함수
+
         render() {
-          return e(
-            'button', 
-            { onClick: () => { this.setState({ liked: !this.state.liked })}, type: 'submit' },
-            this.state.liked === true ? 'Liked' : 'Like'
-            );
+          // 렌더에서 자바스크립를 사용하고 싶은 경우 {}로 객체에 넣어서 표현
+          return <button type="submit" onClick={() => { this.setState({ liked: !this.state.liked }) } }>
+              {this.state.liked === true ? 'Liked' : 'Like'}
+            </button>
+          //객체 형식?
+          // return e(
+          //   'button', 
+          //   { onClick: () => { this.setState({ liked: !this.state.liked })}, type: 'submit' },
+          //   this.state.liked === true ? 'Liked' : 'Like'
+          //   );
           //<button>Like</button>
         }
       }
     </script>
-    <script>
-      ReactDOM.render(e(LikeButton), document.querySelector('#root'));
+    <script type="text/babel">
+      //JSX 는 XML + javascript 이기 때문에 </> 붙이기
+      ReactDOM.render(
+        <div>
+          <LikeButton />
+          <LikeButton />
+          <LikeButton />
+          <LikeButton />
+        </div>
+        , document.querySelector('#root'));
     </script>
   </body>
 </html>
+
+<!-- 
+  JSX 형식 
+   장점
+    - 깔끔하게 보여주고 Javascript + Xml이라고 생각하면 편하다.
+    단점
+    - JSX는 javascript에 자료형이 아니기 때문에 script 태그 type="text/babel" 속성을 추가 시켜야된다.
+          babel JSX를 create Element하여 element로 바꾸어 준다.
+          (=> type="text/babel"은 최선버전 코드 및 )
+ -->
