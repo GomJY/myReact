@@ -15,20 +15,15 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      //HOOKS 함수형 컴포넌트에서 setState, ref 사용하기
       const GuGuDan = () => {
         console.log('렌더링');
-        //state
-        //const [first, setFirst] => [state이름, 이state전용 setState] 비구조화 할당 문법, 구조 분해 할당(destrocture)
         const [first, setFirst]   = React.useState(Math.ceil(Math.random() * 9)); 
         const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9)); 
         const [value, setValue]   = React.useState(''); 
         const [result, setResult]  = React.useState(''); 
 
-        ///ref 사용법
         const inputRef = React.useRef(null);
 
-        //이벤트 함수
         const onChangeInput = (e) => {
           setValue(e.target.value);
         }
@@ -41,7 +36,6 @@
             setSecond(Math.ceil(Math.random() * 9));
             setValue('');
 
-            //hooks에 ref는 current가 붙는 것으로 조금 다르다.
             inputRef.current.focus();
           } else {
             console.log('오답');
@@ -73,21 +67,16 @@
 
     <script>
       /**
-      * hooks 탄생 배경
-      *  -리엑트는 setState, ref를 쓰지 않는 컴포넌트  최대한 클래스를 사용하지 말라고 했다.
-      *   그리고 사람들은 함수 컴포넌트로 간단하게 만들었고 여기서 다시 ref랑 setState를 사용하기를 원해서 hooks가 등장하였다.
-      *
-      * react hooks란 함수 컴포넌트에서 ref랑 setState를 사용할수 있는것
-      *   -짥고 간결하다.
-      * 
-      * react Hooks 사용법
-      *   -state는 비구조화 할당법을 적용한다.  형식: const [stateName, setStateName] = React.useState(초기값);
-      *   -setState는 setStateName(적용할값);
-      *   -ref는 아래처럼
-      *     -const nameRef = React.useRef(초기값);
-      *     -<input ref={inputRef} 
-      *   -!!! ref 통해 focus() 같은 함수를 사용 하고 싶을때
-      *     -inputRef.current.focus();
+       * 클래스와 HOOKS에 차이점
+       * -클래스는 렌더링시 render()만 수행을 하고 Hooks는 이벤트 함수, render함수 전부 수행해서 
+       * 
+       * react JSX에서 바뀐 속성
+       * class => className
+       * for   => htmlFor
+       * 
+       * HOOKS에서 setStateName을 여러개 사용하면 렌더링이 여러번 되는 것인가?
+       *  => 그것은 아니다. setState는 비동기인 이유가 여기에 있다 동기 일 경우에는 위처럼 적용이 되지만
+       *     비동기이기 때문에 react가 알아서 setState를 한번에 모아서 렌더링 해준다. 
       **/
     </script>
   </body>
