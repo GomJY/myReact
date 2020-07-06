@@ -1,0 +1,17 @@
+client.jsx
+  - ReactDom.render함수를 실행하는 곳으로 컨포넌트를 렌더링하는 역할을한다.
+
+worldRelay.jsx
+  -컨포넌트 클래스를 따로 나누어서 모듈화 시킨것과 같다.
+
+webpack.config.js
+  -webpack을 설정할 파일
+  -합칠 컨포넌트를 설정 하거나 mode, name등 다양한 작동방식등을 수정한다.
+  -자세한 내용은 파일 주석 참조
+
+<script src="./dist/app.js"></script>
+  client.jsx, worldRelay.jsx가 require로 불러와야지 다 구현이 된다??
+
+  
+
+
