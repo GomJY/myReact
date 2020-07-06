@@ -1,0 +1,53 @@
+웹팩은 js, jsx파일들을 효율적으로 관리하고 구 브라우저에서도 babel과 같은 최신문법을
+적용시킬수 있게 도와준다.
+
+
+웹팩으로 빌드할려면
+webpack을 package.json 사용해서 명령어 등록
+  "scripts": {
+    "dev" : "webpack"
+  },
+
+  npm run dev
+  npx dev
+
+
+babel이 없는 경우에는 JSX가 없어  <WorldRelay />를 무슨 데이터 형식인지 인식할수가 없어 버그가 발생한다.
+
+에러메시지
+  ERROR in ./client.jsx 6:16
+  Module parse failed: Unexpected token (6:16)
+  You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders    
+  | const WorldRelay = require('WorldRelay');
+  |
+  > ReactDom.render(<WorldRelay />, document.querySelector('#root'));
+
+해결법
+  1.babel 라이브러리 설치
+    $ npm i -D @babel/core  
+      -기본 적인 babel 엔진
+    $ npm i -D @babel/preset-env
+      -사용자 설정에 맞게 빠꾸어줌
+    $ npm i -D @babel/preset-react
+      -리엑트에 맞게 설정해줌
+    $ npm i -D babel-loader
+      -연결해줌
+
+
+webpack.config.js
+  modules: [ ...  ]
+    //entry에 있는 파일을 읽고 거기에 module을 적용하고 output에 뺀다.
+
+
+ERROR in ./WorldRelay.jsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: F:\12.Code\1.web_project\2.front-End\myreact\2.끝말잇기\lecture\WorldRelay.jsx: Support for the experimental syntax 'classProperties' isn't currently enabled (5:9):
+
+  원인
+    .jsx클래스에서 state를 사용하고 싶은 경우에는  @babel/plugin-proposal-class-properties
+    을 webpack.config->modules.rules.options.plugins에 적용 시켜야된다.
+    
+
+  해결법
+    1.$npm i -D @babel/plugin-proposal-class-properties
+    2.plugins: ['@babel/plugin-proposal-class-properties'], 을 webpack.config->modules.rules.options에 추가

@@ -1,15 +1,14 @@
 const React = require('react');
-const react = require('react');
-const { Component } = require('react');
+const { Component } = React;
 
 class WorldRelay extends Component {
   state = {
-
+    text: 'hello, webpack',
   };
   render() {
-    
+    return <h1>{this.state.text}</h1>
   }
 }
 
-module.exports = WorldRelay
+module.exports = WorldRelay;
 

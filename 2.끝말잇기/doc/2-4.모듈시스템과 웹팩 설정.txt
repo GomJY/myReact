@@ -12,6 +12,3 @@ webpack.config.js
 <script src="./dist/app.js"></script>
   client.jsx, worldRelay.jsx가 require로 불러와야지 다 구현이 된다??
 
-  
-
-
