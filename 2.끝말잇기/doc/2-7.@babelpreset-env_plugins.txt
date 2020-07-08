@@ -1,0 +1,27 @@
+preset
+  프리셋은 플러그인에 집합이라고 생각하면 좋다.
+
+@babel/preset-env
+  자동으로 옛날에 있는 브라우저에도 지원해주는 기능을 하는 프리셋이다.
+    -모든 브라우저를 지원하면 참 좋겠지만 그러면 다양한 모듈과 기능을 사용해야되서 react가 무거워진다.
+  
+  형식은 아래와 같다.
+    ['@babel/preset-react', {
+              target: {
+                browsers: ['last 2 chrome versions'],
+              },
+            }],
+    ['@babel/preset-react', {
+            target: {
+              browsers: ['> 5% in kor', 'last 2 chrome versions'],
+            },
+          }],
+          -  > 5% in kor은 한국에서 점유율이 5%이상인 브라우저들을 지원하겠다는 이야기다.
+
+    ['@babel/preset-react', {
+            target: {
+              browsers: ['> 5% in kor', 'last 2 chrome versions'],
+            },
+            debug: true,
+          }],
+  https://github.com/browserslist/browserslist#full-list
