@@ -1,0 +1,16 @@
+webpack-dev-server, react-hot-loader
+
+
+설치및 설정
+  1.$ npm i -D webpack-dev-server
+  2.$ npm i -D react-hot-loader
+  3.package.json
+    "scripts": {
+      "dev": "webpack-dev-server --hot"
+    },
+    output: {
+      publicPath: '/dist/'
+    }
+  4.client.jsx 에서 Hot 적용
+  5.webpack.config.js에서 plugins 적용
+
