@@ -15,7 +15,6 @@ preset
             target: {
               browsers: ['> 5% in kor', 'last 2 chrome versions'],
             },
-          }],
           -  > 5% in kor은 한국에서 점유율이 5%이상인 브라우저들을 지원하겠다는 이야기다.
 
     ['@babel/preset-react', {
