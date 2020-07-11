@@ -1,0 +1,46 @@
+앱이 복잡해지면 에러가 발생해도 디버그를 보기 힘들기 떄문에
+  [WDS] Hot Module Replacement enabled.
+  여기서 앞에 []안에 값을 주시하면서 디버그 하기
+
+Hooks와 Class에 차이점
+
+Hooks는 클래스가 아닌 function을 만들어서 jsx을 반환 받는 형식으로 이해하면 좋다.
+
+  많이 다른점============================================
+  state 와 ref
+    const [result, setResult] = useState('');
+    const inputRef = useRef(null);
+  
+  ref 적용
+  <input ref={inputRef} ...>
+
+  event 및 function
+    const onChangeInput = (e) => {
+      setValue(e.target.value);
+    };
+
+  setState 대신
+   setResult('딩동댕!!!'),
+   set필드이름(바꿀값);
+  
+  focus와 같은 javascript 액션 적용
+    inputRef.current.focus();
+
+  조금 다른점=====================================================
+
+  render 대신
+    return (
+      <>
+        <div>{word}</div>
+        <form onSubmit={onSubmitForm}>
+          <input ref={inputRef} value={value} onChange={onChangeInput} />
+          <button>입력!</button>
+        </form>
+        <div>{result}</div>
+      </>
+    );
+
+  state.field 대신
+    field
+
+
