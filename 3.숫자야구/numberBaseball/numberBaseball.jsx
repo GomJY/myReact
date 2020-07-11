@@ -29,10 +29,16 @@ class NumberBaseball extends Component {
         </form>
         <div>시도: {this.state.tries.length}</div>
         <ul>
-          {['test', 'like', 'do', 'you', 'right'].map((v) => {
-            return (
-              <li>{v}</li>
-            );
+          {[
+            {key: '사과', value: '100원'},
+            {key: '멜론', value: '200원'},
+            {key: '포도', value: '300원'},
+            {key: '앵두', value: '400원'},
+            {key: '수박', value: '500원'},
+          ].map((v, i) => {
+            
+              <li key={v.key + v.value}><b>{v.key}</b> - {v.value}</li>
+            
           })}
         </ul>
       </>
