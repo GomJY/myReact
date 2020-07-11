@@ -1,0 +1,13 @@
+value={this.setState} onChange={this.onChangeInput}
+  -이 두개는 세트로 앞에 value가 보이는 Input에 값을 바꾸어 주고 
+  뒤에 onChange가 state에 있는 값을 바꾸어 준다.
+
+{
+  array.map((v) => {
+    return(
+      <div>{v}</div>
+    );
+  });
+}
+  -리엑트에서 forEach문이라고 생각하면 된다.
+  -v는 array 각각 하나에 값이다.
