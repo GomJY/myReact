@@ -3,7 +3,7 @@ value={this.setState} onChange={this.onChangeInput}
   뒤에 onChange가 state에 있는 값을 바꾸어 준다.
 
 {
-  array.map((v) => {
+  array.map((v, i) => {
     return(
       <div>{v}</div>
     );
@@ -11,3 +11,7 @@ value={this.setState} onChange={this.onChangeInput}
 }
   -리엑트에서 forEach문이라고 생각하면 된다.
   -v는 array 각각 하나에 값이다.
+
+
+  map((item, index) => {...})
+ -index는 현재 몇번째 배열을 수행하는 지를 뜻한다.

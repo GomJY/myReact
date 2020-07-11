@@ -18,4 +18,11 @@ nodeModule 문법과 es6문법은 어느정도 호환이 가능해서 적용이 
     =>export const func1 = { ... };
 
 
+!!!위에 호환이 된다는 말이 module.exports를 import로 받을수 있다는 뜻이 아니다.
+원래는 module.exports, require과 같은 node문법만을 사용하여야 되는데 es6까지 사용해도 리액트에서 정상 작동을 하게 도와준다는 뜻이며
+module.exports로 내보내고 import로 받을려고 하면 에러가 발생한다. 반대로 export default로 내보내고 require로 받으면 또 에러가 발생한다.
+module.export -> require || export default -> import 이 개념 유념하기 바란다.
+
+
+
 

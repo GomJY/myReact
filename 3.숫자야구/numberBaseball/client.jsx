@@ -2,7 +2,7 @@ const React = require('react');
 const ReactDom = require('react-dom');
 const { hot } = require('react-hot-loader/root');
 
-const NumberBaseball = require('./numberBaseball');
+import NumberBaseball from './NumberBaseball';
 
 const Hot = hot(NumberBaseball);
 
