@@ -6,7 +6,10 @@ class Try extends Component {
   render() {
     return (
       <>
-        <li key={this.props.key}><b>{this.props.value.key}</b> - {this.props.value.value}</li>
+        <li>
+          <div>{this.props.tryInfo.try}</div>
+          <div>{this.props.tryInfo.result}</div> 
+        </li>
       </>
     );
   };

@@ -3,53 +3,64 @@ import Try from './Try';
 
 
 function getNumbers() { //숫자 네 개를 겹치지 않고 랜덤하게 뽑는 함수
-  return '';
+  const candidate = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const array = [];
+  for(let i = 0; i < 4; i +=1) {
+    const chosen = candidate.splice(
+      Math.floor(Math.random() * ( 9  - i ))
+      , 1)[0];
+    array.push(chosen);
+  }
+  return array;
 }
 
 
 class NumberBaseball extends Component {
-  // 바인드 사용법
-  constructor(props) {
-    super(props);
-    this.state = {
-      result: '',
-      value: '',
-      answer: getNumbers(),
-      tries: [],
-    };
-    this.onSubmitForm = this.onSubmitForm.bind(this);
-    this.onChangeInput = this.onChangeInput.bind(this);
-  }
-
-  onSubmitForm(e) {
-  e.preventDefault();
-
+  state = {
+    result: '',
+    value: '',
+    answer: getNumbers(),
+    tries: [],
   };
-  onChangeInput = function(e) {
+
+  onSubmitForm = (e) => {
+    e.preventDefault();
+    if(this.state.value === this.state.answer.join('')) {
+      this.setState({
+        result: '홈럼!',
+        tries: [...this.state.tries, {try: this.state.value, result: '홈럼!'}],
+      });
+    } else {
+      const answerArray = this.state.value.split('').map((v) => parseInt(v));
+      let strike = 0;
+      let ball = 0;
+      if (this.state.tries.length >= 9) {
+        this.setState({
+          result: `10번 넘게 틀려서 실패! 답은 ${this.state.answer.join(',')}이 였습니다.`
+        });
+        alert('게임을 다시 시작하빈다.');
+        this.setState({
+          value: '',
+          answer: getNumbers,
+          tries: [],
+        });
+      } else {
+        for(let i =0; i <4; i += 1) {
+          if(answerArray[i] === this.state.answer[i]) {
+            strike += 1;
+          } else if (this.state.answer.includes(answerArray[i])) {
+            ball += 1;
+          }
+        }
+        this.setState({
+          tries: [...this.state.tries, {try: this.state.value, result: `${strike} 스트라이크, ${ball} 볼`}]
+        });
+      }
+    }
+  };
+  onChangeInput = (e) => {
     this.setState({value: e.target.value});
   };
-  // 일반 사용법
-  // state = {
-  //   result: '',
-  //   value: '',
-  //   answer: getNumbers(),
-  //   tries: [],
-  // };
-
-  // onSubmitForm = (e) => {
-  //   e.preventDefault();
-
-  // };
-  // onChangeInput = (e) => {
-  //   this.setState({value: e.target.value});
-  // };
-  fruits = [
-    {key: '사과', value: '100원'},
-    {key: '멜론', value: '200원'},
-    {key: '포도', value: '300원'},
-    {key: '앵두', value: '400원'},
-    {key: '수박', value: '500원'},
-  ];
   
   render() {
     return (
@@ -61,8 +72,8 @@ class NumberBaseball extends Component {
         <div>시도: {this.state.tries.length}</div>
         {/* 시도한 입력 및 결과 */}
         <ul>
-            {this.fruits.map((v, i) => (
-              <Try key={v.key + v.value} value={v} index={i}/>
+            {this.state.tries.map((v, i) => (
+              <Try key ={`${i + 1}'차 시도`} tryInfo={v}/>
             ))}
         </ul>
       </>
