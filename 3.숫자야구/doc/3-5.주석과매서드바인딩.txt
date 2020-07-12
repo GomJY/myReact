@@ -1,0 +1,44 @@
+props를 중첩해서 사용하면(부모가 자식1에게 자식1이 다시 자식2에게....) 이렇게 되면 너무 props가 꼬이게 된다.
+이때 context랑 redux가 사용된다.
+
+
+리액트에서 주석 처리 하는법
+{/* 주석 내용 */}
+
+바인드 하기
+  onChangeInput = (e) => {
+    this.setState({value: e.target.value});
+  };
+  =>
+  onChangeInput = function(e) {
+    this.setState({value: e.target.value});
+  };
+  onChangeInput(e) {
+    this.setState({value: e.target.value});
+  };
+    위에 화살표 함수를 그냥 function 형태로 바꾼다면 setState를 찾을수 없다는 문제가 발생한다. 
+    바로 이때 사용해야되는 것이 bind가 필요한다.
+
+  //bind 처리
+  constructor(props) {
+    super(props);
+    this.state = {
+      result: '',
+      value: '',
+      answer: getNumbers(),
+      tries: [],
+    };
+    this.onSubmitForm = this.onSubmitForm.bind(this);
+    this.onChangeInput = this.onChangeInput.bind(this);
+  }
+  onSubmitForm(e) {
+    e.preventDefault();
+
+  };
+  onChangeInput = function(e) {
+    this.setState({value: e.target.value});
+  };
+    바인드 사용시 위에 처럼this.onSubmitForm = this.onSubmitForm.bind(this); 이렇게 bind를 constructor안에서 해주어야 한다.
+    하지만 리엑트에서 bind를 하는것이 불필요하다 생각하여 화살표함수( func => (e) => { ... } )에는 자동으로 bind를 추가해주는 기능을
+    제공해주고 있다.
+    현재는 대부분 바인드가 아닌 화살표 함술르 사용하지만 옛날코드 같은 경우에는 사용하는 경우도 있다.
