@@ -1,17 +1,56 @@
 const React = require('react');
 const { Component } = React;
 
+function getOperation() {
+  console.log('getOperation');
+  let random = Math.ceil((Math.random() * 9)/4 + 1);
+  
+  if(random == 1) {
+    return '+';
+  } else if(random == 2) {
+    return '-';
+  } else if(random == 3) {
+    return '/';
+  } else if(random == 4) {
+    return '*';
+  }
+}
+
+
 class RandomCalc extends Component {
   state = {
-    first: Math.ceil((Math.random() * 9)/4 + 1 ),
-    second: Math.ceil((Math.random() * 9)/4 + 1),
-    operation: '',
+    first: Math.ceil((Math.random() * 9) + 1 ),
+    second: Math.ceil((Math.random() * 9) + 1),
+    operation: getOperation(),
     value: '',
     message: '',
-    right: '',
   }
 
-  
+  onSubmitForm = (e) => {
+    e.preventDefault();
+    let result = 0;
+    let first = this.state.first,
+        second = this.state.second;
+
+    result = Math.floor(eval(first + this.state.operation +second), 0);
+
+    if(result == this.state.value) {
+      this.setState({
+        message: '정답 입니다.',
+        value: '',
+        first: Math.ceil((Math.random() * 9) + 1 ),
+        second: Math.ceil((Math.random() * 9) + 1),
+        operation: getOperation(),
+      });
+    } else {
+      this.setState({
+        message: '틀렸습니다.',
+        value: '',
+      });
+      this.input.focus();
+    }
+  }
+
   onChangeInput = (e) => {
     this.setState({value: e.target.value});
   }
@@ -22,6 +61,7 @@ class RandomCalc extends Component {
   }
   
   render() {
+    console.log('render')
     return (
       <>
         <div>{this.state.first} {this.state.operation} {this.state.second}</div>
@@ -37,31 +77,3 @@ class RandomCalc extends Component {
 }
 
 module.exports = RandomCalc;
-
-
-
-
-// function randomOperation() {
-//   let random = Math.ceil((Math.random() * 9)/4 + 1);
-//   let right_result = 0;
-//   console.log(this);
-//   let first = this.state.first;
-//   let second =this.state.second; 
-
-//   if(random == 1) {
-//     this.setState({ value: '+' });
-//     right_result = first + second ;
-//   } else if(random == 2) {
-//     this.setState({ value: '-' });
-//     right_result = first - second ;
-//   } else if(random == 3) {
-//     this.setState({ value: '/' });
-//     right_result = first / second ;
-//   } else if(random == 4) {
-//     this.setState({ value: '*'});
-//     right_result = first * second ;
-//   }
-//   this.setState({ right: right_result });
-// }
-// console.log(randomOperation);
-// randomOperation();
