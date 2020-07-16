@@ -1,0 +1,15 @@
+리엑트 렌더링에 기준
+  1.state가 바뀔때(setState({}), )
+  2.shouldComponentUpdate에서 지정한 state가 바뀔때
+
+렌더링 최적화 shouldComponentUpdate
+  리엑트가 setState마다 렌더링을 할지 설정하는 함수이다. return 값이 true면 렌더링을 한다. 
+  인자들은 아래로 구성된다.
+
+  현재 state와 setState로 바뀐 state 비교하고 특정값이 다르면 렌더링 하기
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (this.state.counter !== nextState.counter) {
+          return true;
+        } 
+        return false;
+    }
