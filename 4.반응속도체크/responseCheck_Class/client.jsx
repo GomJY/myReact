@@ -2,7 +2,7 @@ const React = require('react');
 const ReactDom = require('react-dom');
 const { hot } = require('react-hot-loader/root');
 
-import ResponseCheck from './NumberBaseball';
+import ResponseCheck from './ResponseCheck.jsx';
 
 const Hot = hot(ResponseCheck);
 

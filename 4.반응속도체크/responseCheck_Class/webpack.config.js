@@ -3,12 +3,12 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   devtool: 'eval',
-  resole: {
-    extensions: ['.jsx', '.js']
+  resolve: {
+    extensions: [ '.jsx', '.js' ],
   },
-
+  
   entry: {
-    app: './client.jsx'
+    app: './client',  
   },
   module: {
     rules: [{
@@ -16,12 +16,18 @@ module.exports = {
       loader: 'babel-loader',
       options: {
         presets: [
-          ['@babel/preset-react'],
-          '@babel/preset-env'
+          //@babel/preset-react 로 브라우저 지원을 대상화시키기
+          ['@babel/preset-react', {
+            target: {
+              browsers: ['> 5% in kor', 'last 2 chrome versions'],
+            },
+            debug: true,
+          }],
+          '@babel/preset-env', 
         ],
         plugins: [
           '@babel/plugin-proposal-class-properties',
-          'react-hot-loader/babel'
+          'react-hot-loader/babel', 
         ],
       },
     }],
@@ -30,5 +36,5 @@ module.exports = {
     filename: 'app.js',
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/'
-  }
+  },
 };

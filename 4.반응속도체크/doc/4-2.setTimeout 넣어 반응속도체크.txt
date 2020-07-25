@@ -1,0 +1,4 @@
+4-2.setTimeout 넣어 반응속도체크.txt
+
+주석 참고
+ResponseCheck.jsx
