@@ -1,0 +1,41 @@
+props는 자식이 수정하면 안된다.
+하지만 자식에서 수정을 해야되는 경우가 있는데 이때가 state를 연결하는 것이다.
+
+props -> state
+  Hook에서 연결하는법
+    //1.props와 state 연결
+    const [result, setResult] = useState(tryInfo.result);
+    
+    const onClick = () => {
+      //2.props와 state 연결
+      setResult('1');
+    };
+    
+    return {
+      <div onClick={onClick}>{result}</div> 
+    };
+
+  class에서 연결하는법
+    //1.props와 state 연결
+    constructor(props) {
+      super(props);
+
+      //2.props와 state 연결
+      this.state = {
+        result: this.props.result,
+        try: this.props.try,
+      }  
+    }
+    
+    //3.props와 state 연결 - <div>{this.state.tryInfo.try}</div>
+    render() {
+      return (
+        <>
+          <li>
+            <div>{this.state.tryInfo.try}</div>
+            <div>{this.state.tryInfo.result}</div> 
+          </li>
+        </>
+      );
+    };
+

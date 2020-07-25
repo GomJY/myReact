@@ -63,17 +63,18 @@ class NumberBaseball extends PureComponent {
   };
   
   render() {
+    const { result, value, tries } = this.state;
     return (
       <>
         <h1>숫자야구 - pureComponent</h1>
-        <h1>{this.state.result}</h1>
+        <h1>{result}</h1>
         <form onSubmit={this.onSubmitForm}>
-          <input maxLength={4} value={this.state.value} onChange={this.onChangeInput}/>
+          <input maxLength={4} value={value} onChange={this.onChangeInput}/>
         </form>
-        <div>시도: {this.state.tries.length}</div>
+        <div>시도: {tries.length}</div>
         {/* 시도한 입력 및 결과 */}
         <ul>
-            {this.state.tries.map((v, i) => (
+            {tries.map((v, i) => (
               <Try key ={`${i + 1}'차 시도`} tryInfo={v}/>
             ))}
         </ul>
