@@ -6,8 +6,6 @@ class RenderTest extends Component {
   };
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log(this.state);
-    console.log(nextState);
     if (this.state.counter !== nextState.counter) {
       return true;
     }
@@ -16,18 +14,20 @@ class RenderTest extends Component {
   };
   
   onClick = () => {
-    this.setState({});
+    this.setState((prev) => { return {counter: prev.counter} });
   }
+
   onCounter = () => {
     this.setState((prev) => { return {counter: prev.counter + 1}});
-    // this.setState({ counter: this.state.counter});
   }
 
   render() {
     console.log('렌더링', this.state);
-    return (<>
-      <button onClick={this.onClick}>클릭</button>
-      <button onClick={this.onCounter}>카운터</button>
+    return (
+    <>
+      <div>렌더링 - shouldComponentUpdate</div>
+      <button onClick={this.onCounter}>렌더링 카운터</button>
+      <button onClick={this.onClick}>노 렌더링</button>
     </>);
   }
 }

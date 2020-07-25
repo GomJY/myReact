@@ -1,0 +1,18 @@
+PureComponent
+  Class방식에만 사용
+  모든 컨포넌트를 shouldComponent로 최적화할 경우 state가 추가되고 바뀔때마다 수정해주어야 하여
+  관리가 어렵고 컴포넌트마다 shouldComponentUpdate함수를 생성해야되서 읽기도 힘들다.
+
+  그렇기 때문에 리엑트에서 간단한 컴포넌트는 자동으로 관리해주는 기능으로 만든 것이 PureComponent함수로
+  
+
+    1.렌더링 기준
+      - 현재 state에 변수에 참조가 이전가 다를 경우 렌더링을 해준다.
+    
+    2.state변수는 배열과 객체를 서로 넣는 구조로 최대 2중 구조로만 사용
+
+PureComponent는 간단한 컨포넌트에 사용하고
+shouldComponent는 세세한 커스터마이징을 해야할때 사용
+
+memo
+  Hook에서 사용할수 있는 PureComponent
