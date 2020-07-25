@@ -1,0 +1,37 @@
+복습
+ref를 사용해서 DOM객체에 이벤트를 주는 방법
+  class와 
+    input
+    onRefInput = (c) => {
+      this.input = c;
+    };
+    this.input.focus();
+    
+    <input ref={this.onRefInput} />
+  Hooks에서
+    const inputRef = useRef(null);
+    inputRef.current.focus();
+    <input ref={inputRef} />
+위처럼 Ref를 사용해서 DOM객체에 이벤트를 주는것은 서로 달라 헷갈린다.
+그래서 ref를 class, hook에서 사용하는 방법이 통일된 방식이 createRef이다.
+  
+
+createRef
+ Ref를 hook, class에서 통일되게 사용하게 해주는 방식
+
+ import React, { Component, createRef } from 'react';
+
+ inputRef = createRef();
+ this.inputRef.current.focus();
+ <input ref={this.inputRef} />
+
+
+
+!!!createRef와 일반 ref에 차이
+  일반 ref는 함수를 사용하여 미세하게 조정할수 있고
+  createRef는 간단하게 사용할때 사용한다.
+
+!!!setState({...}) 와 setState((prev) => { return {...};})에 차이
+  setState((prev) => { //미세 조정 })는 함수를 사용하여 미세하게 조정 가능
+  일반 setState({...})는 간단하게 사용
+    

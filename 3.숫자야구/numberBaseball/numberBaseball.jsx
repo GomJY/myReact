@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import Try from './Try';
 
 
@@ -30,6 +30,7 @@ class NumberBaseball extends Component {
         result: '홈럼!',
         tries: [...this.state.tries, {try: this.state.value, result: '홈럼!'}],
       });
+      this.inputRef.current.focus();
     } else {
       const answerArray = this.state.value.split('').map((v) => parseInt(v));
       let strike = 0;
@@ -44,6 +45,7 @@ class NumberBaseball extends Component {
           answer: getNumbers,
           tries: [],
         });
+        this.inputRef.current.focus();
       } else {
         for(let i =0; i <4; i += 1) {
           if(answerArray[i] === this.state.answer[i]) {
@@ -62,12 +64,14 @@ class NumberBaseball extends Component {
     this.setState({value: e.target.value});
   };
   
+  inputRef = createRef();
+
   render() {
     return (
       <>
         <h1>{this.state.result}</h1>
         <form onSubmit={this.onSubmitForm}>
-          <input maxLength={4} value={this.state.value} onChange={this.onChangeInput}/>
+          <input ref={this.inputRef} maxLength={4} value={this.state.value} onChange={this.onChangeInput}/>
         </form>
         <div>시도: {this.state.tries.length}</div>
         {/* 시도한 입력 및 결과 */}
