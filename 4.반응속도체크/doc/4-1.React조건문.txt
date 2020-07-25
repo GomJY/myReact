@@ -1,0 +1,32 @@
+React에서 조건문
+  -react Render안에서서는 조건을 사용할수 없어 아래 3가지 방법을 사용한다.
+  1.삼항 연산자
+  {
+    this.state.result.length === 0 
+      ? null 
+      : <div>평균시간 : {this.state.result.reduce((a, c) => a + c) / this.state.result.length}ms</div>
+  }
+
+  2.and, or 연산자
+  {
+    this.state.result.length === 0 &&
+      : <div>평균시간 : {this.state.result.reduce((a, c) => a + c) / this.state.result.length}ms</div>
+  }
+
+  3.함수로 빼서 수행
+  renderAverage = () => {
+    const { result } = this.result;
+    return result.length === 0 
+      ? null 
+      : <div>평균시간 : {this.state.result.reduce((a, c) => a + c) / this.state.result.length}ms</div>
+  };
+
+  render() {
+    return (
+      <>
+        {this.renderAverage()}
+      </>
+    );
+  }
+
+  
