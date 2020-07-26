@@ -1,0 +1,10 @@
+4-4.반응속도체크 Hooks로전환하기
+
+Hook에서 값이 번경되어도 렌더링 하고 싶지않은 값은 REF에 저장
+반대로 setState를 하는 경우에는 렌더링이 작동한다.
+
+그렇기 때문에
+Ref는 렌더링에 영향을 주지 않고
+setState는 렌더링에 영향을 주지 않는다.
+
+Class에서 Ref에 개념은 this.startTime, this.endTime, this.time 같은 것이 Ref형태로 사용된다.
