@@ -1,1 +1,10 @@
 4-5. return 내부에 for과 if 쓰기
+
+return 내무에서 for과 if문을 쓰기 위해서는 {} 객체형으로 내부에서 즉시함수를 사용해서 return 해주어야한다.
+
+  즉시 함수 
+  (() => {
+    if(isName) {
+      return (<div>name is true</div>);
+    }
+  })()
