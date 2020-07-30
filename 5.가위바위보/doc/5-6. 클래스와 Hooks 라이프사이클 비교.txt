@@ -1,0 +1,18 @@
+Hook- useEffect
+  - 화면이 렌더링 될때 감지된다. 
+  - 여러번 사용할수 있다.
+  - Hook는 각 state를 기준으로 시기마다 설정을 해준다.
+
+Class- 라이플 사이클
+  - 각 사이클에 맞게 작동된다.
+  - class는 각 시기를 기준으로 모든 state를 설정한다.
+
+  작동 시기
+    1. DidMount : render -> ref 이후에 실행
+    2. shouldComponentUpdate : setState/ props가 바뀔때
+    3. DidUpdate : shouldComponentUpdate -> 렌더링 이후에 작동한다.
+    4. WillUnmount: 부모가 나를 없앨때 작동한다.
+
+
+Hook - useLayoutEffect
+  - 화면이 크기가 작고 커질때 작동한다.

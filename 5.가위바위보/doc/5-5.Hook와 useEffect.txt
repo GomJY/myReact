@@ -1,0 +1,21 @@
+Hook에서는 라이프사이클인 아래에 3가지를 사용할수 없다.
+  componentDidMount
+  componentDidUpdate
+  componentWillUnmount
+를 사용할수 없다.
+
+하지만 그대신 
+useEffect를 사용하여 위에 기능을 대신하여 사용한다.
+
+useEffect(함수, 배열);
+  -componentDidMount, componentDidUpdate 역할(1대 1대응은 아님)
+  -함수 return을 통해 componentWillUnmount 역할
+  
+  함수
+    -componentDidMount, componentDidUpdate에 넣을 비동기식 함수를 넣기
+    -return - componentDidMount, componentDidUpdate 에서 실행한 비동기함수 멈추기
+  배열
+    -함수에서 바뀌는 state
+    -배열에 있는 state값이 바뀔때마다 다시 수행한다.
+    -배열값이 없는 경우에는 한번만 수행된다.
+

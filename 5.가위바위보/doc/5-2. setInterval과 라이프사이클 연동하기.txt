@@ -1,0 +1,8 @@
+componentDidMount
+  - Constructor -> render -> ref 이후에 작동한다.
+  - 비동기 함수를 수행할때 사용된다.
+
+
+componentWillUnmount
+  - 소멸하기 이전에 수행하며
+  - DidMount에서 실행시킨 비동기함수 종료 시키기

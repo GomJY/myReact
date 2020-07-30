@@ -1,0 +1,9 @@
+5-3. 가위바위보 게임 만들기
+
+interval(함수, 시간 ms)
+  - 주기적으로 정해진 시간만큼 수행하게 하는 비동기 방식에 함수
+시작
+  this.interval = setInterval(this.changeHand, 1000);
+
+중지
+  clearInterval(this.interval); 

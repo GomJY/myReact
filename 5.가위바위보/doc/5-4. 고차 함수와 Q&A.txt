@@ -1,0 +1,14 @@
+고차함수를 사용한 간략화
+
+  onClick={() => {this.onClickBtn('바위')}}
+  onClickBtn = (choice) => { ... }
+
+  위를 아래처럼 바꿀수 있다.
+
+  onClick={this.onClickBtn('가위')}
+  //메소드에 " () => " 추가 하기
+  onClickBtn = (choice) => () => { ... }
+
+  그리고 (choice) => () => {...} 이렇게 넣는 것을 패턴이라고 한다. 
+
+    
