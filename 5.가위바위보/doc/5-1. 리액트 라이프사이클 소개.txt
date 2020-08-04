@@ -1,4 +1,8 @@
 클래스의 경우
   Constructor -> render -> ref -> componentDidMount ->
-  (setState/ propps 바뀔때 -> shouldComponentUpdate(true)-> render -> componentDidUpdate)
+  (setState/ propps 바뀔때 -> 
+  shouldComponentUpdate(true)-> 
+  render ->
+  componentDidUpdate -> 
+  componentWillUnmount ->
   부모가 나를 없앨때 -> componentWillUnmount -> 소멸
