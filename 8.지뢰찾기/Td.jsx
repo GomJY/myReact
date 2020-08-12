@@ -3,6 +3,7 @@ import { TableContext, CODE, OPEN_CELL, CLICK_MINE, QUESTION_CELL, NORMAL_CELL, 
 
 const getTdStyle = (code) => {
   switch(code) {
+    case CODE.MINE:
     case CODE.NORMAL:
       return {
         background: '#444'
@@ -21,14 +22,17 @@ const getTdStyle = (code) => {
       return {
         background: 'red'
       }
+    
     default:
       return {
-        background: '#444'
+        background: 'white'
       }
   }
 }
 const getTdText = (code) => {
   switch(code) {
+    // case CODE.MINE:
+    case CODE.OPENED:
     case CODE.NORMAL:
       return '';
     case CODE.MINE:
@@ -38,20 +42,19 @@ const getTdText = (code) => {
     case CODE.FLAG_MINE:
     case CODE.FLAG:
       return '!';
+    case CODE.QUESTION_MINE:
     case CODE.QUESTION:
-      return '?';   
+      return '?';
     default:
-        return '';
+        return code;
   }
 }
 
 const Td = ({cellIndex, rowIndex}) => {
   const { tableData, dispatch, halted } = useContext(TableContext);
   const cellData = tableData[rowIndex][cellIndex];
-  console.log(halted);
   
   const onClickTd = useCallback(() => {
-    console.log(halted);
     if(halted) {
       return;
     }
@@ -66,7 +69,6 @@ const Td = ({cellIndex, rowIndex}) => {
         return; 
       case CODE.MINE:
         dispatch({type: CLICK_MINE, row: rowIndex, cell: cellIndex});
-        console.log(halted);
         return;
       case CODE.NORMAL:
         dispatch({type: OPEN_CELL, row: rowIndex, cell: cellIndex});
@@ -76,7 +78,6 @@ const Td = ({cellIndex, rowIndex}) => {
   });
   
   const onRightClickTd = useCallback((e) => {
-    console.log(halted);
     if(halted) {
       return;
     }

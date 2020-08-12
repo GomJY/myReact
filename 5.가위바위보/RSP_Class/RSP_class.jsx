@@ -103,8 +103,8 @@ class RSP extends Component  {
           <button id="rock" className="btn" onClick={this.onClickBtn('바위')}>바위</button>
           <button id="paper" className="btn" onClick= {this.onClickBtn('보')}>보</button>
         </div>
-    <div className="">{result}</div>
-    <div className="">현재 {score}점</div>
+        <div className="">{result}</div>
+        <div className="">현재 {score}점</div>
       </> 
     );
   }
